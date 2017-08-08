@@ -1,5 +1,5 @@
 <?php
-        header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Origin: *');
 	require 'config.php';
 	extract($_GET);
 	define('DIR_SAVE_TEST', $CONFIG['DIR_SAVE_TEST']);
@@ -39,12 +39,12 @@
 			};
 			$move = 'xcopy "'.constant('SP').'\\'.constant('DIR_SAVE_TEST').'" "'.constant('PATH').'" /E /H /R /X /I /K';
 			$del = 'RD /S /Q "'.constant('SP').'\\'.constant('DIR_SAVE_TEST').'\\'.$GLOBALS['probName'].'"';
-                        _run($move);
-                        _run($del);
-                        $moveSample = 'xcopy "'.constant('SP').'\\'.constant('DIR_SAMPLE').'" "'.constant('PATH').'\\'.$GLOBALS['probName'].'" /E /H /R /X /I /K';
-                        _run($moveSample);
-                        $runCPP = '"'.constant('PATH').'\\'.$GLOBALS['probName'].'\\solution.cpp"';
-                        _run($runCPP);
+            	_run($move);
+                _run($del);
+                $moveSample = 'xcopy "'.constant('SP').'\\'.constant('DIR_SAMPLE').'" "'.constant('PATH').'\\'.$GLOBALS['probName'].'" /E /H /R /X /I /K';
+                _run($moveSample);
+                $runCPP = '"'.constant('PATH').'\\'.$GLOBALS['probName'].'\\solution.cpp"';
+                _run($runCPP);
 		} else {
 			_return(false, 'Da ton tai bai tap nay!');
 		};
