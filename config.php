@@ -1,6 +1,6 @@
 <?php
 $CONFIG = Array(
-    'PATH' => 'E:\Codeforces',
+    'PATH' => '',
     'DIR_SAVE_TEST' => 'tests',
 );
 ?>
