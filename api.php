@@ -49,8 +49,10 @@ if (isset($info))
         _run($move);
         _run($del);
         $moveSample = 'xcopy "' . constant('SP') . '\\' . constant('DIR_SAMPLE') . '" "' . constant('PATH') . '\\' . $GLOBALS['probName'] . '" /E /H /R /X /I /K';
+        $renameCmd = 'rename "' . constant('PATH') . '\\' . $GLOBALS['probName'].'\\solution.cpp" '.$GLOBALS['probName'].'.cpp';
         _run($moveSample);
-        $runCPP = '"' . constant('PATH') . '\\' . $GLOBALS['probName'] . '\\solution.cpp"';
+        _run($renameCmd);
+        $runCPP = '"' . constant('PATH') . '\\' . $GLOBALS['probName'] . '\\'.$GLOBALS['probName'].'.cpp"';
         _run($runCPP);
     }
     else
