@@ -59,11 +59,8 @@ function getTest() {
         testcase: testCase
     };
     var par = encodeURI(JSON.stringify(info));
-    console.log(par);
     _sendRequest(par, function(response) {
         if (response.length > 1) alert(response);
     });
 }
-
 getTest();
- 
