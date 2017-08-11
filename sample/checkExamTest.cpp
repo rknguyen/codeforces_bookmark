@@ -1,7 +1,15 @@
 #include <bits/stdc++.h>
 #include <windows.h>
+#ifdef WINDOWS
+    #include <direct.h>
+    #define GetCurrentDir _getcwd
+#else
+    #include <unistd.h>
+    #define GetCurrentDir getcwd
+#endif
 using namespace std;
 #define endl "\n";
+string probName = "";
 string numToStr(int n) {
     string res;
     ostringstream convert;
@@ -32,7 +40,7 @@ int comp(int id) {
     if (tsoutput.good()) {
         vector <string> urans;
         vector <string> tsans;
-        string cOutput = "solution.exe < tests/" + ids + ".inp > tests/output.txt";
+        string cOutput = probName + ".exe < tests/" + ids + ".inp > tests/output.txt";
         system(cOutput.c_str());
 
         ifstream uroutput;
@@ -85,7 +93,7 @@ void check() {
     SetConsoleTextAttribute(hConsole, 7);
 
     cout << endl;
-    string compile = "g++ -m32 -o solution.exe solution.cpp";
+    string compile = "g++ -m32 -o "+probName+".exe "+probName+".cpp";
     system(compile.c_str());
     cout << "=======================" << endl;
     cout << endl;
@@ -129,19 +137,31 @@ void check() {
 
     cout << endl;
     cout << endl;
+}
 
-    int type;
-    cout << "Input 1 to recheck or 0 to exit: ";
-    cin >> type;
-    if (type == 1) {
-        system("cls");
-        check();
+string getPath() {
+    char cCurrentPath[FILENAME_MAX];
+    GetCurrentDir(cCurrentPath, sizeof(cCurrentPath));
+    cCurrentPath[sizeof(cCurrentPath) - 1] = '\0';
+    return cCurrentPath;
+}
+
+string getDirName() {
+    string path = getPath();
+    string s = "";
+    int local = -1;
+    for (int i = (int)path.size()-1; i >= 0; i--) {
+        if (path[i] == '\\') {
+            local = i;
+            break;
+        }
     }
+    for (int i = local+1; i < (int)path.size(); i++) s += path[i];
+    return s;
 }
 
 int main() {
-
+    probName = getDirName();
     check();
-
     return 0;
 }
